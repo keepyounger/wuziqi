@@ -305,12 +305,4 @@ typedef struct QiZi QiZi;
     }
 }
 
-//点击检测
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint point = [touch locationInView:self];
-    [self addOneQiziWithPoint:point];
-}
-
 @end

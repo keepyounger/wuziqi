@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet NextStepColorView *nextStep;
 @property (weak, nonatomic) IBOutlet QiziView *qiziView;
+@property (weak, nonatomic) IBOutlet QiPanView *qipanView;
 
 @end
 
@@ -40,6 +41,24 @@
 - (void)dealloc
 {
     [self.qiziView removeObserver:self forKeyPath:@"isWhite"];
+}
+
+- (IBAction)xiaqi:(UITapGestureRecognizer *)sender
+{
+    CGPoint point = [sender locationInView:self.qiziView];
+    [self.qiziView addOneQiziWithPoint:point];
+}
+
+- (IBAction)suofang:(UIPinchGestureRecognizer *)sender
+{
+    self.qipanView.transform = CGAffineTransformScale(self.qipanView.transform, sender.scale, sender.scale);
+    sender.scale = 1;
+}
+
+- (IBAction)move:(UIPanGestureRecognizer *)sender {
+    CGPoint point = [sender translationInView:self.qipanView];
+    self.qipanView.transform = CGAffineTransformTranslate(self.qipanView.transform, point.x, point.y);
+    [sender setTranslation:CGPointMake(0, 0) inView:self.qipanView];
 }
 
 - (void)didReceiveMemoryWarning {
